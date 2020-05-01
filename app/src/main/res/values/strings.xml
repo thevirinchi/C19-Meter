@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">C19 Meter</string>
+    <string name="by_z3t4z00k">By Z3T4Z00K</string>
+    <string name="title_activity_dashboard">dashboard</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="c19_nmeter">C19\nMeter</string>
+    <string name="total_cases">Total Cases</string>
+    <string name="_10_000">10,000</string>
+    <string name="_1_000_new_cases_today">1,000 new cases today</string>
+    <string name="recent">Recent</string>
+    <string name="cases">Cases</string>
+    <string name="recoveries">Recoveries</string>
+    <string name="deaths">Deaths</string>
+    <string name="top_states">Top States</string>
+    <string name="maharashtra">Maharashtra</string>
+    <string name="gujarat">Gujarat</string>
+    <string name="delhi">Delhi</string>
+    <string name="latest_advisories">Latest Advisories</string>
+    <string name="sample_headline_1">Lakshadweep: Regulation on movement of passengers from islands to mainlands</string>
+    <string name="sample_date_1">2020-04-15</string>
+    <string name="view_more">View more</string>
+    <string name="sample_headline_2">Sikkim: Notification for statewide lockdown.</string>
+    <string name="sample_date_2">2020-04-15</string>
+</resources>
