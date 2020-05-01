@@ -29,6 +29,16 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="ContentDescription" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/heading"
+                android:text="@string/app_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/navigationBarButton"
+                app:layout_constraintEnd_toStartOf="@id/countryButton"/>
+
             <ImageView
                 android:id="@+id/countryButton"
                 android:layout_width="wrap_content"
