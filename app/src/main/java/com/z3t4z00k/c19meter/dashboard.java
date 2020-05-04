@@ -1,6 +1,8 @@
 package com.z3t4z00k.c19meter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -24,6 +26,7 @@ public class dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
         final TextView cases = findViewById(R.id.cases);
@@ -66,9 +69,15 @@ public class dashboard extends AppCompatActivity {
             }
         }
 
-        Login login = new Login();
-        login.execute();
-
+        if(!sharedPreferences.getString("cases", "0").equals("0")){
+            cases.setText(sharedPreferences.getString("cases", "0"));
+            recov.setText(sharedPreferences.getString("recov", "0"));
+            death.setText(sharedPreferences.getString("death", "0"));
+        }
+        else {
+            Login login = new Login();
+            login.execute();
+        }
 
         /*LineChart casesChart = findViewById(R.id.casesChart);
         List<Entry> cases = new ArrayList<>();
