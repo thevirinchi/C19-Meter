@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +18,7 @@ import java.util.HashMap;
 
 public class dashboard extends AppCompatActivity {
 
-    String URL = "https://c19meterphp.herokuapp.com/index.php";
+    String URL = "https://c19meterphp.herokuapp.com/topstates.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,12 @@ public class dashboard extends AppCompatActivity {
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
         final TextView cases = findViewById(R.id.cases);
+        final TextView s1c = findViewById(R.id.state1count);
+        final TextView s2c = findViewById(R.id.state2count);
+        final TextView s3c = findViewById(R.id.state3count);
+        final TextView s1h = findViewById(R.id.state1Heading);
+        final TextView s2h = findViewById(R.id.state2Heading);
+        final TextView s3h = findViewById(R.id.state3Heading);
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
@@ -52,15 +57,16 @@ public class dashboard extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                Log.d("dashboard", "Error while fetching cases- " + s);
-
                 JSONObject obj;
                 try {
                     obj = new JSONObject(s);
-                    if (obj.getInt("cases")>0) {
-                        cases.setText(obj.getString("cases"));
-                        recov.setText(obj.getString("recov"));
-                        death.setText(obj.getString("death"));
+                    if (!obj.getString("S1").equals("")) {
+                        s1h.setText(obj.getString("S1"));
+                        s2h.setText(obj.getString("S2"));
+                        s3h.setText(obj.getString("S3"));
+                        s1c.setText(obj.getString("C1"));
+                        s2c.setText(obj.getString("C2"));
+                        s3c.setText(obj.getString("C3"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -68,16 +74,12 @@ public class dashboard extends AppCompatActivity {
                 }
             }
         }
+        Login login = new Login();
+        login.execute();
 
-        if(!sharedPreferences.getString("cases", "0").equals("0")){
-            cases.setText(sharedPreferences.getString("cases", "0"));
-            recov.setText(sharedPreferences.getString("recov", "0"));
-            death.setText(sharedPreferences.getString("death", "0"));
-        }
-        else {
-            Login login = new Login();
-            login.execute();
-        }
+        cases.setText(sharedPreferences.getString("cases", "0"));
+        recov.setText(sharedPreferences.getString("recov", "0"));
+        death.setText(sharedPreferences.getString("death", "0"));
 
         /*LineChart casesChart = findViewById(R.id.casesChart);
         List<Entry> cases = new ArrayList<>();
