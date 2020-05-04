@@ -1,48 +1,19 @@
 package com.z3t4z00k.c19meter;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class dashboard extends AppCompatActivity {
 
@@ -57,6 +28,7 @@ public class dashboard extends AppCompatActivity {
         final TextView recov = findViewById(R.id.recoveries);
         final TextView cases = findViewById(R.id.cases);
 
+        @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
 
             @Override
@@ -79,13 +51,13 @@ public class dashboard extends AppCompatActivity {
                 super.onPostExecute(s);
                 Log.d("dashboard", "Error while fetching cases- " + s);
 
-                JSONObject obj = null;
+                JSONObject obj;
                 try {
                     obj = new JSONObject(s);
                     if (obj.getInt("cases")>0) {
-                        cases.setText(String.valueOf(obj.getString("cases")));
-                        recov.setText(String.valueOf(obj.getString("recov")));
-                        death.setText(String.valueOf(obj.getString("death")));
+                        cases.setText(obj.getString("cases"));
+                        recov.setText(obj.getString("recov"));
+                        death.setText(obj.getString("death"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
