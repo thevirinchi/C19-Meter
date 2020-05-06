@@ -26,6 +26,7 @@ public class dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
+        final TextView count = findViewById(R.id.count);
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
         final TextView cases = findViewById(R.id.cases);
@@ -77,6 +78,7 @@ public class dashboard extends AppCompatActivity {
         Login login = new Login();
         login.execute();
 
+        count.setText(sharedPreferences.getString("confi", "0"));
         cases.setText(sharedPreferences.getString("cases", "0"));
         recov.setText(sharedPreferences.getString("recov", "0"));
         death.setText(sharedPreferences.getString("death", "0"));

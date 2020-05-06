@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     if (obj.getInt("cases")>0) {
                         SharedPreferences sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("confi", obj.getString("confi"));
                         editor.putString("cases", obj.getString("cases"));
                         editor.putString("recov", obj.getString("recov"));
                         editor.putString("death", obj.getString("death"));
