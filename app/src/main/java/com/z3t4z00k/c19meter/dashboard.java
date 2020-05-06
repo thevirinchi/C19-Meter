@@ -2,12 +2,15 @@ package com.z3t4z00k.c19meter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,7 @@ public class dashboard extends AppCompatActivity {
         final TextView d4 = findViewById(R.id.date4);
         final TextView t5 = findViewById(R.id.title5);
         final TextView d5 = findViewById(R.id.date5);
+        final TextView topStates = findViewById(R.id.topStatesViewMore);
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
@@ -102,6 +106,13 @@ public class dashboard extends AppCompatActivity {
         d3.setText(sharedPreferences.getString("d3", ""));
         d4.setText(sharedPreferences.getString("d4", ""));
         d5.setText(sharedPreferences.getString("d5", ""));
+
+        topStates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, MapsActivity.class));
+            }
+        });
 
         /*LineChart casesChart = findViewById(R.id.casesChart);
         List<Entry> cases = new ArrayList<>();
