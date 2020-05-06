@@ -36,7 +36,9 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    String URL = "https://c19meterphp.herokuapp.com/index.php";
+    //String URL = "https://c19meterphp.herokuapp.com/index.php";
+    String URL = "https://zetazook.club/c19/index.php";
+    String URL_UPDATES = "https://zetazook.club/c19/updates.php";
     public static final String MY_PREFERENCES = "MyPrefs";
 
     @Override
@@ -56,6 +58,57 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", "ParseUser- Error- " + e.getMessage());
                 }
             });*/
+
+        @SuppressLint("StaticFieldLeak")
+        class Updates extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                RequestHandler requestHandler = new RequestHandler();
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put("name", "Archit");
+
+                return requestHandler.sendPostRequest(URL_UPDATES, params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Log.d("Main Activity", "Error while fetching updates- " + s);
+
+                JSONObject obj;
+                try {
+                    obj = new JSONObject(s);
+                    if (!obj.getString("dat0").equals("")) {
+                        SharedPreferences sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("d1", obj.getString("dat0"));
+                        editor.putString("d2", obj.getString("dat1"));
+                        editor.putString("d3", obj.getString("dat2"));
+                        editor.putString("d4", obj.getString("dat3"));
+                        editor.putString("d5", obj.getString("dat4"));
+                        editor.putString("t1", obj.getString("txt0"));
+                        editor.putString("t2", obj.getString("txt1"));
+                        editor.putString("t3", obj.getString("txt2"));
+                        editor.putString("t4", obj.getString("txt3"));
+                        editor.putString("t5", obj.getString("txt4"));
+                        editor.apply();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Updates Exception: " + e, Toast.LENGTH_LONG).show();
+                    Log.d("MainActivity", "Updates- " + e);
+                }
+            }
+        }
+        Updates updates = new Updates();
+        updates.execute();
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {

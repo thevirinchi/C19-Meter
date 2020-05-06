@@ -36,6 +36,16 @@ public class dashboard extends AppCompatActivity {
         final TextView s1h = findViewById(R.id.state1Heading);
         final TextView s2h = findViewById(R.id.state2Heading);
         final TextView s3h = findViewById(R.id.state3Heading);
+        final TextView t1 = findViewById(R.id.title1);
+        final TextView d1 = findViewById(R.id.date1);
+        final TextView t2 = findViewById(R.id.title2);
+        final TextView d2 = findViewById(R.id.date2);
+        final TextView t3 = findViewById(R.id.title3);
+        final TextView d3 = findViewById(R.id.date3);
+        final TextView t4 = findViewById(R.id.title4);
+        final TextView d4 = findViewById(R.id.date4);
+        final TextView t5 = findViewById(R.id.title5);
+        final TextView d5 = findViewById(R.id.date5);
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
@@ -82,6 +92,16 @@ public class dashboard extends AppCompatActivity {
         cases.setText(sharedPreferences.getString("cases", "0"));
         recov.setText(sharedPreferences.getString("recov", "0"));
         death.setText(sharedPreferences.getString("death", "0"));
+        t1.setText(sharedPreferences.getString("t1", ""));
+        t2.setText(sharedPreferences.getString("t2", ""));
+        t3.setText(sharedPreferences.getString("t3", ""));
+        t4.setText(sharedPreferences.getString("t4", ""));
+        t5.setText(sharedPreferences.getString("t5", ""));
+        d1.setText(sharedPreferences.getString("d1", ""));
+        d2.setText(sharedPreferences.getString("d2", ""));
+        d3.setText(sharedPreferences.getString("d3", ""));
+        d4.setText(sharedPreferences.getString("d4", ""));
+        d5.setText(sharedPreferences.getString("d5", ""));
 
         /*LineChart casesChart = findViewById(R.id.casesChart);
         List<Entry> cases = new ArrayList<>();
