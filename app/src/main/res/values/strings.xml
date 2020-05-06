@@ -43,4 +43,5 @@
     <string name="back">Back</string>
     <string name="figures_are_being_reconciled_with_icmr">*figures are being reconciled with ICMR</string>
     <string name="latest_updates">Latest Updates</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
