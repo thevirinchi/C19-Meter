@@ -8,9 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,23 @@ public class dashboard extends AppCompatActivity {
         final TextView t5 = findViewById(R.id.title5);
         final TextView d5 = findViewById(R.id.date5);
         final TextView topStates = findViewById(R.id.topStatesViewMore);
+        final ImageView navButton = findViewById(R.id.navigationBarButton);
+        final ImageView close = findViewById(R.id.close);
+        final ConstraintLayout nav = findViewById(R.id.navigationDrawer);
+
+        nav.setVisibility(View.GONE);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.setVisibility(View.VISIBLE);
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav.setVisibility(View.GONE);
+            }
+        });
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {

@@ -8,4 +8,137 @@
 
     <include layout="@layout/content_dashboard" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navigationDrawer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="start"
+        android:padding="32dp"
+        android:background="@drawable/ic_splash">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/appName"
+                android:theme="@style/headingWhite"
+                android:text="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close_black_24dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/menuContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/appName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/subscript">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/subscript"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:src="@drawable/ic_code_solid"
+                    android:tint="@color/colorLightBlue"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toTopOf="@id/with"
+                    app:layout_constraintEnd_toStartOf="@id/with"
+                    app:layout_constraintBottom_toBottomOf="@id/with"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/with"
+                    android:theme="@style/title"
+                    android:text="@string/nbsp_with_nbsp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    app:layout_constraintBottom_toTopOf="@id/india"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <ImageView
+                    android:src="@drawable/ic_heart_solid"
+                    android:tint="@color/colorPink"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toTopOf="@id/with"
+                    app:layout_constraintStart_toEndOf="@id/with"
+                    app:layout_constraintBottom_toBottomOf="@id/with"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/in"
+                    android:theme="@style/title"
+                    app:layout_constraintTop_toBottomOf="@id/with"
+                    app:layout_constraintEnd_toStartOf="@id/india"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/india"
+                    android:src="@drawable/ic_india_flag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    app:layout_constraintTop_toTopOf="@id/in"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/in"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/by"
+                    android:theme="@style/title"
+                    app:layout_constraintBottom_toBottomOf="@id/india"
+                    app:layout_constraintStart_toEndOf="@id/india"
+                    app:layout_constraintTop_toBottomOf="@id/with" />
+
+                <TextView
+                    android:id="@+id/zetazook"
+                    android:theme="@style/subTitle"
+                    android:text="@string/z3t4z00k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/india"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

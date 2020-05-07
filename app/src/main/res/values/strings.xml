@@ -48,4 +48,8 @@
     <string name="cured">Cured:</string>
     <string name="deaths2">Deaths:</string>
     <string name="loading">Loading</string>
+    <string name="nbsp_with_nbsp"> with </string>
+    <string name="in">in</string>
+    <string name="by">by</string>
+    <string name="z3t4z00k">Z3T4Z00K</string>
 </resources>
