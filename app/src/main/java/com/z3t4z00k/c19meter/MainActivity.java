@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -15,8 +16,10 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+
+        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("India"));
+
         @SuppressLint("StaticFieldLeak")
         class Updates extends AsyncTask<Void, Void, String> {
 
@@ -70,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("t3", obj.getString("txt2"));
                         editor.putString("t4", obj.getString("txt3"));
                         editor.putString("t5", obj.getString("txt4"));
+                        editor.putString("dd", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+                        editor.putString("mm", String.valueOf(calendar.get(Calendar.MONTH)));
                         editor.apply();
                     }
                 } catch (JSONException e) {
@@ -79,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        Updates updates = new Updates();
-        updates.execute();
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
@@ -132,7 +139,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Login login = new Login();
-        login.execute();
+        final SharedPreferences sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+        if(!String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).equals(sharedPreferences.getString("dd", "00")) && !String.valueOf(calendar.get(Calendar.MONTH)).equals(sharedPreferences.getString("mm", "00"))) {
+            Updates updates = new Updates();
+            updates.execute();
+            Login login = new Login();
+            login.execute();
+        }
+        else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(!sharedPreferences.getBoolean("onBoard", false))
+                        startActivity(new Intent(MainActivity.this, onBoardingOne.class));
+                    startActivity(new Intent(MainActivity.this, dashboard.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    finish();
+                }
+            }, 3000);
+        }
+
+
     }
 }
