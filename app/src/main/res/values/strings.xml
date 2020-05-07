@@ -33,4 +33,19 @@
     <string name="_3515">3515</string>
     <string name="_4395">4395</string>
     <string name="national">National Stats</string>
+    <string name="blank" />
+    <string name="view_all">View All</string>
+    <string name="next">Next</string>
+    <string name="covid_19_dashboard">COVID-19 Dashboard</string>
+    <string name="with_the_c19_meter_you_get_all_the_latest_figures_and_advisories_at_a_glance_directly_from_the_govt_of_india">With the C19 Meter, you get all the latest figures and advisories at a glance, directly from the Govt. of India.</string>
+    <string name="detailed_report">Detailed Report</string>
+    <string name="get_the_most_updated_stats_in_detail_with_their_growth_patterns_statewise">Get the most updated stats in detail, with their growth patterns, statewise</string>
+    <string name="back">Back</string>
+    <string name="figures_are_being_reconciled_with_icmr">*figures are being reconciled with ICMR</string>
+    <string name="latest_updates">Latest Updates</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="total">Total Cases: </string>
+    <string name="cured">Cured:</string>
+    <string name="deaths2">Deaths:</string>
+    <string name="loading">Loading</string>
 </resources>

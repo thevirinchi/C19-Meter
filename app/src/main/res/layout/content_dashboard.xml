@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/extraWhite"
-                android:text="@string/_1_000_new_cases_today"
+                android:text="@string/figures_are_being_reconciled_with_icmr"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/count"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,10 +132,40 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_white"
+                android:background="@drawable/rounded_corners_5_grad1"
                 android:shadowColor="#27377517"
                 android:shadowDy="5"
                 android:translationZ="20dp">
+
+                <TextView
+                    android:id="@+id/cases"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/headingWhite"
+                    android:text="@string/_10498"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/casesHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+                
+                <!--<androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/casesHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/casesChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <TextView
                     android:id="@+id/casesHeading"
@@ -143,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="@string/cases"
-                    android:theme="@style/small"
+                    android:theme="@style/extraWhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -161,17 +191,47 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_white"
+                android:background="@drawable/rounded_corners_5_grad3"
                 android:shadowColor="#27377517"
                 android:shadowDy="5"
                 android:translationZ="20dp">
+
+                <TextView
+                    android:id="@+id/recoveries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/headingWhite"
+                    android:text="@string/_10498"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/recoveriesHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!--<androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/recoveriesHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/recoveriesChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <TextView
                     android:id="@+id/recoveriesHeading"
                     android:text="@string/recoveries"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/small"
+                    android:theme="@style/extraWhite"
                     android:paddingBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -190,17 +250,47 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_white"
+                android:background="@drawable/rounded_corners_5_grad2"
                 android:shadowColor="#27377517"
                 android:shadowDy="5"
                 android:translationZ="20dp">
+
+                <TextView
+                    android:id="@+id/deaths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/headingWhite"
+                    android:text="@string/_10498"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/deathsHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!--<androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/deathsHeading"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/deathsChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <TextView
                     android:id="@+id/deathsHeading"
                     android:text="@string/deaths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/small"
+                    android:theme="@style/extraWhite"
                     android:paddingBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -225,140 +315,116 @@
             app:layout_constraintTop_toBottomOf="@id/recentContainer"
             app:layout_constraintStart_toStartOf="@id/counterContainer"/>
 
+        <TextView
+            android:id="@+id/topStatesViewMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_all"
+            android:theme="@style/extra"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/recentContainer"
+            app:layout_constraintEnd_toEndOf="@id/statesContainer"/>
+
         <LinearLayout
             android:id="@+id/statesContainer"
-            android:layout_height="150dp"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="6dp"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corners_5_white"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#27377517"
+            android:shadowDy="5"
+            android:translationZ="20dp"
             app:layout_constraintTop_toBottomOf="@id/topStates"
             app:layout_constraintStart_toStartOf="@id/counterContainer"
             app:layout_constraintEnd_toEndOf="@id/counterContainer">
 
-            <Space
-                android:layout_width="20dp"
-                android:visibility="invisible"
-                android:layout_height="match_parent"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/state1Container"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_grad1"
-                android:shadowColor="#27377517"
-                android:shadowDy="5"
-                android:translationZ="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:id="@+id/state1count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/headingWhite"
+                    android:theme="@style/body"
                     android:text="@string/_10498"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/state1Heading"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/state1Heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
                     android:text="@string/maharashtra"
-                    android:theme="@style/extraWhite"
+                    android:theme="@style/body"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Space
-                android:layout_width="16dp"
-                android:visibility="invisible"
-                android:layout_height="match_parent"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/state2Container"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_grad2"
-                android:shadowColor="#27377517"
-                android:shadowDy="5"
-                android:translationZ="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:id="@+id/state2count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/headingWhite"
-                    android:text="@string/_4395"
+                    android:theme="@style/body"
+                    android:text="@string/_10498"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/state2Heading"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/state2Heading"
-                    android:text="@string/gujarat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/extraWhite"
-                    android:paddingBottom="8dp"
+                    android:text="@string/maharashtra"
+                    android:theme="@style/body"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Space
-                android:layout_width="16dp"
-                android:visibility="invisible"
-                android:layout_height="match_parent"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/state3Container"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/rounded_corners_5_grad3"
-                android:shadowColor="#27377517"
-                android:shadowDy="5"
-                android:translationZ="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:id="@+id/state3count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/headingWhite"
-                    android:text="@string/_3515"
+                    android:theme="@style/body"
+                    android:text="@string/_10498"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/state3Heading"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/state3Heading"
-                    android:text="@string/delhi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/extraWhite"
-                    android:paddingBottom="8dp"
+                    android:text="@string/maharashtra"
+                    android:theme="@style/body"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="20dp"
-                android:visibility="invisible"
-                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -366,9 +432,9 @@
             android:id="@+id/advisories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/latest_advisories"
+            android:text="@string/latest_updates"
             android:theme="@style/title"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintTop_toBottomOf="@id/statesContainer"
             app:layout_constraintStart_toStartOf="@id/counterContainer"/>
 
