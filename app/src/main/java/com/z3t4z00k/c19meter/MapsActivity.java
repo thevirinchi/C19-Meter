@@ -5,17 +5,21 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -51,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 MZ = 23, OD = 24, PY = 25, PB = 26,
                 RJ = 27, TN = 28, TS = 29, TR = 30,
                 UK = 31, UP = 32, WB = 33,
-                DD = 34, DL = 35, LD = 36, NL = 37, SK = 38;
+                DD = 8, DL = 9, LD = 36, NL = 37, SK = 38;
     private String URL = "https://zetazook.club/c19/states.php?id=";
     private String res;
 
@@ -82,6 +86,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    private void hideView(final View view){
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Log.d("MapsActvitiy", "Hide animation started");
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.d("MapsActvitiy", "Hide animation ended");
+                view.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+        view.startAnimation(animation);
+    }
+
+    private void dispView(final View view){
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Log.d("MapsActvitiy", "Display animation started");
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.d("MapsActvitiy", "Display animation ended");
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+        view.startAnimation(animation);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,76 +154,94 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        final LatLng delhi = new LatLng(24.7, 82.41);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //hideView(stats);
                 stats.setVisibility(View.GONE);
                 mMap.clear();
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.zoomTo(4);
+                mMap.animateCamera(cameraUpdate);
             }
         });
 
-        LatLng delhi = new LatLng(28.38, 77.12);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
+        final CameraUpdate cameraUpdate = CameraUpdateFactory.zoomTo(4);
+        mMap.animateCamera(cameraUpdate);
         mMap.setBuildingsEnabled(true);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                CameraUpdate cameraUpdate1 = CameraUpdateFactory.zoomTo(6);
+                mMap.animateCamera(cameraUpdate1);
+                if(stats.getVisibility()==View.VISIBLE)
+                    stats.setVisibility(View.GONE);
+                t.setText("...");
+                c.setText("...");
+                d.setText("...");
+                stat.setText(R.string.loading);
                 mMap.clear();
-            String country = getAddress(latLng, COUNTRY);
-            Log.d("MapsActivity", "Country= " + country);
-            String state = "";
-            if(country == null || country.equals("India")) {
-                jk = country == null;
-                if(jk)
-                    state = "Jammu & Kashmir";
-                else
-                    state = getAddress(latLng, STATE);
-                final String id = state;
-                @SuppressLint("StaticFieldLeak")
-                class Login extends AsyncTask<Void, Void, String> {
+                String country = getAddress(latLng, COUNTRY);
+                Log.d("MapsActivity", "Country= " + country);
+                String state = "";
+                if(country == null || country.equals("India")) {
+                    jk = country == null;
+                    if(jk)
+                        state = "Jammu & Kashmir";
+                    else
+                        state = getAddress(latLng, STATE);
+                    final String id = state;
+                    @SuppressLint("StaticFieldLeak")
+                    class Login extends AsyncTask<Void, Void, String> {
 
-                    @Override
-                    protected void onPreExecute() {
-                        super.onPreExecute();
-                    }
-
-                    @Override
-                    protected String doInBackground(Void... voids) {
-                        RequestHandler requestHandler = new RequestHandler();
-
-                        HashMap<String, String> params = new HashMap<>();
-                        params.put("name", "Archit");
-
-                        return requestHandler.sendPostRequest(URL+ getId(id), params);
-                    }
-
-                    @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-                        res = s;
-                        Log.d("MapsActivity", "State stats- " + s);
-                        JSONObject jsonObject;
-                        try {
-                            jsonObject = new JSONObject(s);
-                            t.setText(jsonObject.getString("t"));
-                            c.setText(jsonObject.getString("c"));
-                            d.setText(jsonObject.getString("d"));
-                            stat.setText(jsonObject.getString("s"));
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
                         }
-                        catch (JSONException e){
-                            e.printStackTrace();
-                            Toast.makeText(MapsActivity.this, "Exception: " + e, Toast.LENGTH_LONG).show();
+
+                        @Override
+                        protected String doInBackground(Void... voids) {
+                            RequestHandler requestHandler = new RequestHandler();
+
+                            HashMap<String, String> params = new HashMap<>();
+                            params.put("name", "Archit");
+
+                            return requestHandler.sendPostRequest(URL+ getId(id), params);
+                        }
+
+                        @Override
+                        protected void onPostExecute(String s) {
+                            super.onPostExecute(s);
+                            res = s;
+                            Log.d("MapsActivity", "State stats- " + s);
+                            JSONObject jsonObject;
+                            try {
+                                jsonObject = new JSONObject(s);
+                                t.setText(jsonObject.getString("t"));
+                                c.setText(jsonObject.getString("c"));
+                                d.setText(jsonObject.getString("d"));
+                                stat.setText(jsonObject.getString("s"));
+                            }
+                            catch (JSONException e){
+                                e.printStackTrace();
+                                Toast.makeText(MapsActivity.this, "Exception: " + e, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
+
+                    Login login = new Login();
+                    login.execute();
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("Cases in " + state));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    //dispView(stats);
+                    //stats.animate().alphaBy(0).alpha(1).setDuration(1000);
+                    stats.setVisibility(View.VISIBLE);
                 }
-                Login login = new Login();
-                login.execute();
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Cases in " + state));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                stats.setVisibility(View.VISIBLE);
-            }
+                else Toast.makeText(getApplicationContext(), "Region outside India!", Toast.LENGTH_SHORT).show();
             }
         });
     }
