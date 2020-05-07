@@ -4,6 +4,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView stat;
     private TextView t, c, d;
     private ImageView close;
+    private ImageView back;
     private int AN = 1, AP = 2, AR = 3, AS = 4,
                 BR = 5, CG = 7, CH = 6, GA = 10,
                 GJ = 11, HR = 12, HP = 13, JK = 14,
@@ -95,6 +97,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         t = findViewById(R.id.t);
         c = findViewById(R.id.c);
         d = findViewById(R.id.d);
+        back = findViewById(R.id.navigationBarButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapsActivity.this, dashboard.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
     }
 
     @Override
