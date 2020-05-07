@@ -12,21 +12,25 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
-public class onBoardingTwo extends AppCompatActivity {
+public class onBoardingThree extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_boarding_two);
+        setContentView(R.layout.activity_on_boarding_three);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        final SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
         final Button button = findViewById(R.id.button);
         final TextView back = findViewById(R.id.back);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(onBoardingTwo.this, onBoardingThree.class));
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("onBoard", true);
+                editor.apply();
+                startActivity(new Intent(onBoardingThree.this, dashboard.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
@@ -34,10 +38,9 @@ public class onBoardingTwo extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(onBoardingTwo.this, onBoardingOne.class));
+                startActivity(new Intent(onBoardingThree.this, onBoardingTwo.class));
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-
     }
 }
