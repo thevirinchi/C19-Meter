@@ -4,7 +4,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Animatable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,10 +34,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -176,6 +180,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("India"));
+                final SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                 CameraUpdate cameraUpdate1 = CameraUpdateFactory.zoomTo(6);
                 mMap.animateCamera(cameraUpdate1);
                 if(stats.getVisibility()==View.VISIBLE)
@@ -225,6 +231,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 c.setText(jsonObject.getString("c"));
                                 d.setText(jsonObject.getString("d"));
                                 stat.setText(jsonObject.getString("s"));
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(id+"s", jsonObject.getString("s"));
+                                editor.putString(id+"t", jsonObject.getString("t"));
+                                editor.putString(id+"c", jsonObject.getString("c"));
+                                editor.putString(id+"d", jsonObject.getString("d"));
+                                editor.putString(id+"dd", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+                                editor.putString(id+"mm", String.valueOf(calendar.get(Calendar.MONTH)));
+                                editor.apply();
                             }
                             catch (JSONException e){
                                 e.printStackTrace();
@@ -232,9 +247,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         }
                     }
-
-                    Login login = new Login();
-                    login.execute();
+                    if(!String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).equals(sharedPreferences.getString(id+"dd", "00")) && !String.valueOf(calendar.get(Calendar.MONTH)).equals(sharedPreferences.getString(id+"mm", "00"))) {
+                        Log.d("MapsActivity", "Current- " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH));
+                        Log.d("MapsActivity", "Stored- " + sharedPreferences.getString(id+"dd", "00") + "/" + sharedPreferences.getString(id+"mm", "00"));
+                        Log.d("MapsActivity", "State selected- "+id+" "+sharedPreferences.getString(id+"s", "null"));
+                        Login login = new Login();
+                        login.execute();
+                    }
+                    else{
+                        Log.d("MapsActivity", "Current- " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH));
+                        Log.d("MapsActivity", "Stored- " + sharedPreferences.getString(id+"dd", "00") + "/" + sharedPreferences.getString(id+"mm", "00"));
+                        t.setText(sharedPreferences.getString(id+"t", "0"));
+                        c.setText(sharedPreferences.getString(id+"c", "0"));
+                        d.setText(sharedPreferences.getString(id+"d", "0"));
+                        stat.setText(sharedPreferences.getString(id+"s", "0"));
+                    }
                     mMap.addMarker(new MarkerOptions().position(latLng).title("Cases in " + state));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     //dispView(stats);
