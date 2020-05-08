@@ -153,6 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+        Toast.makeText(getApplicationContext(), "Just click the state of interest to know the details.", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -193,7 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
                 String country = getAddress(latLng, COUNTRY);
                 Log.d("MapsActivity", "Country= " + country);
-                String state = "";
+                String state;
                 if(country == null || country.equals("India")) {
                     jk = country == null;
                     if(jk)
@@ -274,71 +275,74 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private int getId(String id) {
-        if(id.equals("Jammu & Kashmir"))
-            return JK;
-        else if(id.equals("Himachal Pradesh"))
-            return HP;
-        else if(id.equals("Uttarakhand"))
-            return UK;
-        else if(id.equals("Uttar Pradesh"))
-            return UP;
-        else if(id.equals("Haryana"))
-            return HR;
-        else if(id.equals("Chandigarh"))
-            return CH;
-        else if(id.equals("Punjab"))
-            return PB;
-        else if(id.equals("Delhi"))
-            return DL;
-        else if(id.equals("Rajasthan"))
-            return RJ;
-        else if(id.equals("Madhya Pradesh"))
-            return MP;
-        else if(id.equals("Bihar"))
-            return BR;
-        else if(id.equals("Sikkim"))
-            return SK;
-        else if(id.equals("Arunachal Pradesh"))
-            return AR;
-        else if(id.equals("Assam"))
-            return AS;
-        else if(id.equals("Meghalaya"))
-            return ML;
-        else if(id.equals("Mizoram"))
-            return MZ;
-        else if(id.equals("Nagaland"))
-            return NL;
-        else if(id.equals("Manipur"))
-            return MN;
-        else if(id.equals("Tripura"))
-            return TR;
-        else if(id.equals("West Bengal"))
-            return WB;
-        else if(id.equals("Jharkhand"))
-            return JH;
-        else if(id.equals("Odisha"))
-            return OD;
-        else if(id.equals("Chhattisgarh"))
-            return CG;
-        else if(id.equals("Gujarat"))
-            return GJ;
-        else if(id.equals("Maharashtra"))
-            return MH;
-        else if(id.equals("Goa"))
-            return GA;
-        else if(id.equals("Telangana"))
-            return TS;
-        else if(id.equals("Andhra Pradesh"))
-            return AP;
-        else if(id.equals("Karnataka"))
-            return KA;
-        else if(id.equals("Tamil Nadu"))
-            return TN;
-        else if(id.equals("Kerala"))
-            return KL;
-        else if(id.equals("Lakshadweep"))
-            return LD;
-        else return 0;
+        switch (id) {
+            case "Jammu & Kashmir":
+                return JK;
+            case "Himachal Pradesh":
+                return HP;
+            case "Uttarakhand":
+                return UK;
+            case "Uttar Pradesh":
+                return UP;
+            case "Haryana":
+                return HR;
+            case "Chandigarh":
+                return CH;
+            case "Punjab":
+                return PB;
+            case "Delhi":
+                return DL;
+            case "Rajasthan":
+                return RJ;
+            case "Madhya Pradesh":
+                return MP;
+            case "Bihar":
+                return BR;
+            case "Sikkim":
+                return SK;
+            case "Arunachal Pradesh":
+                return AR;
+            case "Assam":
+                return AS;
+            case "Meghalaya":
+                return ML;
+            case "Mizoram":
+                return MZ;
+            case "Nagaland":
+                return NL;
+            case "Manipur":
+                return MN;
+            case "Tripura":
+                return TR;
+            case "West Bengal":
+                return WB;
+            case "Jharkhand":
+                return JH;
+            case "Odisha":
+                return OD;
+            case "Chhattisgarh":
+                return CG;
+            case "Gujarat":
+                return GJ;
+            case "Maharashtra":
+                return MH;
+            case "Goa":
+                return GA;
+            case "Telangana":
+                return TS;
+            case "Andhra Pradesh":
+                return AP;
+            case "Karnataka":
+                return KA;
+            case "Tamil Nadu":
+                return TN;
+            case "Kerala":
+                return KL;
+            case "Lakshadweep":
+                return LD;
+            default:
+                return 0;
+        }
     }
 
 
