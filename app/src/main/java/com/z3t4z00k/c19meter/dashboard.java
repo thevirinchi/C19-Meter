@@ -61,6 +61,14 @@ public class dashboard extends AppCompatActivity {
         final ImageView navButton = findViewById(R.id.navigationBarButton);
         final ImageView close = findViewById(R.id.close);
         final ConstraintLayout nav = findViewById(R.id.navigationDrawer);
+        final TextView faq = findViewById(R.id.faq);
+
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mohfw.gov.in/pdf/FAQ.pdf")));
+            }
+        });
 
         nav.setVisibility(View.GONE);
         navButton.setOnClickListener(new View.OnClickListener() {
