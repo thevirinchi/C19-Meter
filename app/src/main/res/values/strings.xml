@@ -58,4 +58,9 @@
     <string name="state_wise_list">State Wise List</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
+    <string name="title_activity_statewise">statewise</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
 </resources>

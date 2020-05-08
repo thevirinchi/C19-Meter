@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -62,6 +63,15 @@ public class dashboard extends AppCompatActivity {
         final ImageView close = findViewById(R.id.close);
         final ConstraintLayout nav = findViewById(R.id.navigationDrawer);
         final TextView faq = findViewById(R.id.faq);
+        final TextView state = findViewById(R.id.list);
+
+        state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, statewise.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         faq.setOnClickListener(new View.OnClickListener() {
             @Override

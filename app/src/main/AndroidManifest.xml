@@ -24,7 +24,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".onBoardingThree"/>
+        <activity
+            android:name=".statewise"
+            android:label="@string/title_activity_statewise"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".onBoardingThree" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
