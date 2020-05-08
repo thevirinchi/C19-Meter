@@ -157,6 +157,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MapsActivity.this, dashboard.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         final LatLng delhi = new LatLng(24.7, 82.41);
