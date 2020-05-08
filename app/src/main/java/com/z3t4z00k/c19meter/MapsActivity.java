@@ -50,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView stat;
     private TextView t, c, d;
     private ImageView close;
-    private ImageView back;
     private int AN = 1, AP = 2, AR = 3, AS = 4,
                 BR = 5, CG = 7, CH = 6, GA = 10,
                 GJ = 11, HR = 12, HP = 13, JK = 14,
@@ -61,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 UK = 31, UP = 32, WB = 33,
                 DD = 8, DL = 9, LD = 36, NL = 37, SK = 38;
     private String URL = "https://zetazook.club/c19/states.php?id=";
-    private String res;
 
     private String getAddress(LatLng latLng, int code){
         Geocoder geocoder;
@@ -90,51 +88,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void hideView(final View view){
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                Log.d("MapsActvitiy", "Hide animation started");
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.d("MapsActvitiy", "Hide animation ended");
-                view.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });
-        view.startAnimation(animation);
-    }
-
-    private void dispView(final View view){
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                Log.d("MapsActvitiy", "Display animation started");
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.d("MapsActvitiy", "Display animation ended");
-                view.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });
-        view.startAnimation(animation);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
@@ -145,7 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         t = findViewById(R.id.t);
         c = findViewById(R.id.c);
         d = findViewById(R.id.d);
-        back = findViewById(R.id.navigationBarButton);
+        ImageView back = findViewById(R.id.navigationBarButton);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,7 +186,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         @Override
                         protected void onPostExecute(String s) {
                             super.onPostExecute(s);
-                            res = s;
                             Log.d("MapsActivity", "State stats- " + s);
                             JSONObject jsonObject;
                             try {
