@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("t3", obj.getString("txt2"));
                         editor.putString("t4", obj.getString("txt3"));
                         editor.putString("t5", obj.getString("txt4"));
+                        editor.putString("l1", obj.getString("url0"));
+                        editor.putString("l2", obj.getString("url1"));
+                        editor.putString("l3", obj.getString("url2"));
+                        editor.putString("l4", obj.getString("url3"));
+                        editor.putString("l5", obj.getString("url4"));
                         editor.putString("dd", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
                         editor.putString("mm", String.valueOf(calendar.get(Calendar.MONTH)));
                         editor.apply();

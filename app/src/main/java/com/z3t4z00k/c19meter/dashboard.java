@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -30,7 +31,7 @@ public class dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
         final TextView count = findViewById(R.id.count);
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
@@ -51,6 +52,11 @@ public class dashboard extends AppCompatActivity {
         final TextView d4 = findViewById(R.id.date4);
         final TextView t5 = findViewById(R.id.title5);
         final TextView d5 = findViewById(R.id.date5);
+        final TextView l1 = findViewById(R.id.more1);
+        final TextView l2 = findViewById(R.id.more2);
+        final TextView l3 = findViewById(R.id.more3);
+        final TextView l4 = findViewById(R.id.more4);
+        final TextView l5 = findViewById(R.id.more5);
         final TextView topStates = findViewById(R.id.topStatesViewMore);
         final ImageView navButton = findViewById(R.id.navigationBarButton);
         final ImageView close = findViewById(R.id.close);
@@ -125,6 +131,41 @@ public class dashboard extends AppCompatActivity {
         d3.setText(sharedPreferences.getString("d3", ""));
         d4.setText(sharedPreferences.getString("d4", ""));
         d5.setText(sharedPreferences.getString("d5", ""));
+
+        l1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l1", "error"))));
+            }
+        });
+
+        l2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l2", "error"))));
+            }
+        });
+
+        l3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l3", "error"))));
+            }
+        });
+
+        l4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l4", "error"))));
+            }
+        });
+
+        l5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l5", "error"))));
+            }
+        });
 
         topStates.setOnClickListener(new View.OnClickListener() {
             @Override
