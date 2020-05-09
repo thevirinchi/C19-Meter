@@ -2,6 +2,7 @@ package com.z3t4z00k.c19meter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -25,8 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class statewise extends AppCompatActivity {
 
@@ -37,6 +40,8 @@ public class statewise extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statewise);
 
+        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("India"));
+        final SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         final ImageView back = findViewById(R.id.back);
         final RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -88,12 +93,22 @@ public class statewise extends AppCompatActivity {
                     jsonArray = new JSONArray(s);
                     obj = jsonArray.getJSONObject(0);
                     if (!obj.getString("s").equals("")) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         for (int i = 0; i<33; i++) {
                             obj = jsonArray.getJSONObject(i);
                             Log.d("statewise", "Response- " + obj);
                             stateModals.add(new StateModal(obj.getString("s"),obj.getString("t"),obj.getString("c"),obj.getString("d")));
                             stateListAdapter.notifyDataSetChanged();
+                            editor.putString(i+"s", obj.getString("s"));
+                            editor.putString(i+"t", obj.getString("t"));
+                            editor.putString(i+"c", obj.getString("c"));
+                            editor.putString(i+"d", obj.getString("d"));
+                            editor.putString(i+"dd", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+                            editor.putString(i+"mm", String.valueOf(calendar.get(Calendar.MONTH)));
                         }
+                        editor.putString("lastUpdate_dd", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+                        editor.putString("lastUpdate_mm", String.valueOf(calendar.get(Calendar.MONTH)));
+                        editor.apply();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -101,8 +116,18 @@ public class statewise extends AppCompatActivity {
                 }
             }
         }
-        Login login = new Login();
-        login.execute();
+        if((calendar.get(Calendar.DAY_OF_MONTH) > Integer.parseInt(sharedPreferences.getString("lastUpdate_dd", "00"))) || ((calendar.get(Calendar.MONTH)) > Integer.parseInt(sharedPreferences.getString("lastUpdate_mm", "00")))) {
+            Log.d("statewise", "Current- " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH));
+            Log.d("statewise", "Stored- " + sharedPreferences.getString("lastUpdate_dd", "00") + "/" + sharedPreferences.getString("lastUpdate_mm", "00"));
+            Login login = new Login();
+            login.execute();
+        }
+        else
+            for (int i = 0; i <22; i++){
+                stateModals.add(new StateModal(sharedPreferences.getString(i+"s", ""), sharedPreferences.getString(i+"t", ""), sharedPreferences.getString(i+"c", ""), sharedPreferences.getString(i+"d", "")));
+                stateListAdapter.notifyDataSetChanged();
+            }
+
 
     }
 
