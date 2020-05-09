@@ -64,4 +64,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="previous">Previous</string>
     <string name="sep">|</string>
+    <string name="state">State</string>
+    <string name="death2">Death</string>
+    <string name="cured2">Cured</string>
+    <string name="total2">Total</string>
 </resources>
