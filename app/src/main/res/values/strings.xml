@@ -68,4 +68,5 @@
     <string name="death2">Death</string>
     <string name="cured2">Cured</string>
     <string name="total2">Total</string>
+    <string name="title_activity_myth_busters">MythBusters</string>
 </resources>

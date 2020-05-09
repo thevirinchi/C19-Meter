@@ -25,9 +25,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".MythBusters"
+            android:label="@string/title_activity_myth_busters"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".statewise"
             android:label="@string/title_activity_statewise"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".onBoardingThree" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
