@@ -210,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         }
                     }
-                    if(!String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).equals(sharedPreferences.getString(id+"dd", "00")) && !String.valueOf(calendar.get(Calendar.MONTH)).equals(sharedPreferences.getString(id+"mm", "00"))) {
+                    if((calendar.get(Calendar.DAY_OF_MONTH) > Integer.parseInt(sharedPreferences.getString(id+"dd", "00"))) || ((calendar.get(Calendar.MONTH)) > Integer.parseInt(sharedPreferences.getString(id+"mm", "00")))) {
                         Log.d("MapsActivity", "Current- " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH));
                         Log.d("MapsActivity", "Stored- " + sharedPreferences.getString(id+"dd", "00") + "/" + sharedPreferences.getString(id+"mm", "00"));
                         Log.d("MapsActivity", "State selected- "+id+" "+sharedPreferences.getString(id+"s", "null"));
