@@ -128,4 +128,10 @@ public class State extends AppCompatActivity {
         queue.add(stringRequest);
 
     }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(State.this, statewise.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

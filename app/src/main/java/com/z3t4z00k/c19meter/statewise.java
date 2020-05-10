@@ -138,5 +138,6 @@ public class statewise extends AppCompatActivity implements stateListAdapter.OnS
         Intent intent = new Intent(statewise.this, State.class);
         intent.putExtra("s", stateModals.get(position).getState());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }
