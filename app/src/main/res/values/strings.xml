@@ -88,4 +88,5 @@
     <string name="myth14">Vaccines against pneumonia, such as pneumococcal vaccine and Haemophilus influenzae type b (Hib) vaccine, DO NOT provide protection against the coronavirus.</string>
     <string name="totals">Totals</string>
     <string name="district_wise_distribution">District-wise Distribution</string>
+    <string name="district">District</string>
 </resources>
