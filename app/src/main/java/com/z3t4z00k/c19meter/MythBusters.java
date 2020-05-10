@@ -1,5 +1,6 @@
 package com.z3t4z00k.c19meter;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +28,12 @@ public class MythBusters extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(MythBusters.this, dashboard.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 }
