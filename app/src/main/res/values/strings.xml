@@ -86,4 +86,6 @@
     <string name="myth12">To date, there is NO specific medicine recommended to prevent or treat the coronavirus.</string>
     <string name="myth13">Taking a hot bath DOES NOT prevent the coronavirus.</string>
     <string name="myth14">Vaccines against pneumonia, such as pneumococcal vaccine and Haemophilus influenzae type b (Hib) vaccine, DO NOT provide protection against the coronavirus.</string>
+    <string name="totals">Totals</string>
+    <string name="district_wise_distribution">District-wise Distribution</string>
 </resources>
