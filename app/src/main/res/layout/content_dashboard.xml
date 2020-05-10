@@ -111,6 +111,16 @@
             app:layout_constraintTop_toBottomOf="@id/counterContainer"
             app:layout_constraintStart_toStartOf="@id/counterContainer"/>
 
+        <TextView
+            android:id="@+id/mapView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View on map"
+            android:theme="@style/extra"
+            app:layout_constraintTop_toTopOf="@id/national"
+            app:layout_constraintBottom_toBottomOf="@id/national"
+            app:layout_constraintEnd_toEndOf="@id/counterContainer"/>
+
         <LinearLayout
             android:id="@+id/recentContainer"
             android:layout_height="150dp"
@@ -316,6 +326,16 @@
             app:layout_constraintStart_toStartOf="@id/counterContainer"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/active_cases"
+            android:theme="@style/small"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/topStates"
+            app:layout_constraintBottom_toBottomOf="@id/topStates"
+            app:layout_constraintStart_toEndOf="@id/topStates"/>
+
+        <TextView
             android:id="@+id/topStatesViewMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -350,8 +370,10 @@
                     android:id="@+id/state1count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/body"
+                    android:theme="@style/bodyWhite"
                     android:text="@string/_10498"
+                    android:paddingHorizontal="8dp"
+                    android:background="@drawable/pills_grad3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -379,8 +401,10 @@
                     android:id="@+id/state2count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/body"
+                    android:theme="@style/bodyWhite"
                     android:text="@string/_10498"
+                    android:paddingHorizontal="8dp"
+                    android:background="@drawable/pills_grad2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -408,8 +432,10 @@
                     android:id="@+id/state3count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/body"
+                    android:theme="@style/bodyWhite"
                     android:text="@string/_10498"
+                    android:paddingHorizontal="8dp"
+                    android:background="@drawable/pills_grad1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

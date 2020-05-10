@@ -64,6 +64,24 @@ public class dashboard extends AppCompatActivity {
         final ConstraintLayout nav = findViewById(R.id.navigationDrawer);
         final TextView faq = findViewById(R.id.faq);
         final TextView state = findViewById(R.id.list);
+        final TextView map = findViewById(R.id.mapView);
+        final TextView viewMap = findViewById(R.id.map);
+
+        viewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, MapsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, MapsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         state.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +206,7 @@ public class dashboard extends AppCompatActivity {
         topStates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, MapsActivity.class));
+                startActivity(new Intent(dashboard.this, statewise.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
