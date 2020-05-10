@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,11 +41,26 @@ public class State extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         final String URL = "https://api.covid19india.org/v2/state_district_wise.json";
+        final TextView head = findViewById(R.id.heading);
+        final TextView count = findViewById(R.id.count);
+        final TextView cases = findViewById(R.id.cases);
+        final TextView recov = findViewById(R.id.recoveries);
+        final TextView death = findViewById(R.id.deaths);
+        final ImageView back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(State.this, statewise.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String state = Objects.requireNonNull(bundle).getString("s");
         Log.d("State", Objects.requireNonNull(state));
+        head.setText(state);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
 // Request a string response from the provided URL.
@@ -69,11 +87,23 @@ public class State extends AppCompatActivity {
                                 if(jsonObject != null){
                                     try {
                                         if(state.equals(jsonObject.getString("state"))){
-                                            Log.d(TAG, "onResponseMatch: "+"i= "+i+" "+ jsonObject);
+                                            //Log.d(TAG, "onResponseMatch: "+"i= "+i+" "+ jsonObject);
+                                            JSONArray districts = (JSONArray) jsonObject.get("districtData");
+                                            int act = 0, con = 0, dec = 0, rec = 0;
+                                            for(int j = 0; j < districts.length(); j++){
+                                                JSONObject district = (JSONObject) districts.get(j);
+                                                act += district.getInt("active");
+                                                con += district.getInt("confirmed");
+                                                dec += district.getInt("deceased");
+                                                rec += district.getInt("recovered");
+                                            }
+                                            Log.d(TAG, "onResponse: act="+act+" con="+con+" dec="+dec+" rec="+rec);
+                                            count.setText(String.valueOf(con));
+                                            cases.setText(String.valueOf(act));
+                                            recov.setText(String.valueOf(rec));
+                                            death.setText(String.valueOf(dec));
                                             break;
                                         }
-                                        else
-                                            Log.d(TAG, "onResponseNotMatch: "+"i= "+i+" "+ jsonObject.getString("state"));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
