@@ -71,4 +71,5 @@
     <string name="title_activity_myth_busters">MythBusters</string>
     <string name="active_cases">(Active cases)</string>
     <string name="view_map">View Map</string>
+    <string name="myth_busters">Myth Busters</string>
 </resources>

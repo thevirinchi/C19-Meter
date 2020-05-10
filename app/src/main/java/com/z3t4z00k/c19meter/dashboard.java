@@ -66,6 +66,15 @@ public class dashboard extends AppCompatActivity {
         final TextView state = findViewById(R.id.list);
         final TextView map = findViewById(R.id.mapView);
         final TextView viewMap = findViewById(R.id.map);
+        final TextView myths = findViewById(R.id.myths);
+
+        myths.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, MythBusters.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         viewMap.setOnClickListener(new View.OnClickListener() {
             @Override
