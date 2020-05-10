@@ -58,7 +58,7 @@
     <string name="state_wise_list">State Wise List</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
-    <string name="title_activity_statewise">statewise</string>
+    <string name="title_activity_statewise">state-wise</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -72,4 +72,18 @@
     <string name="active_cases">(Active cases)</string>
     <string name="view_map">View Map</string>
     <string name="myth_busters">Myth Busters</string>
+    <string name="myth1">Cold weather and snow CANNOT kill the CoronaVirus .</string>
+    <string name="myth2">Hand dryers are NOT effective in killing the coronavirus.</string>
+    <string name="myth3">There is NO evidence that regularly rinsing the nose with saline has protected people from infection with the coronavirus.</string>
+    <string name="myth4">The coronavirus CAN be transmitted in areas with hot and humid climates.</string>
+    <string name="myth5">Ultraviolet light SHOULD NOT be used for sterilization and can cause skin irritation.</string>
+    <string name="myth6">Garlic is healthy but there is NO evidence from the current outbreak that eating garlic has protected people from the coronavirus.</string>
+    <string name="myth7">Hand dryers are NOT effective in killing the coronavirus.</string>
+    <string name="myth8">Thermal scanners CAN detect if people have a fever but CANNOT detect whether or not someone has the coronavirus.</string>
+    <string name="myth9">Antibiotics DO NOT work against viruses, antibiotics only work against bacteria.</string>
+    <string name="myth10">There is NO evidence that companion animals/pets such as dogs or cats can transmit the coronavirus.</string>
+    <string name="myth11">Spraying alcohol or chlorine all over your body WILL NOT kill viruses that have already entered your body.</string>
+    <string name="myth12">To date, there is NO specific medicine recommended to prevent or treat the coronavirus.</string>
+    <string name="myth13">Taking a hot bath DOES NOT prevent the coronavirus.</string>
+    <string name="myth14">Vaccines against pneumonia, such as pneumococcal vaccine and Haemophilus influenzae type b (Hib) vaccine, DO NOT provide protection against the coronavirus.</string>
 </resources>
