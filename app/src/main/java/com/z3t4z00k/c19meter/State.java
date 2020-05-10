@@ -1,6 +1,8 @@
 package com.z3t4z00k.c19meter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -47,6 +50,11 @@ public class State extends AppCompatActivity {
         final TextView recov = findViewById(R.id.recoveries);
         final TextView death = findViewById(R.id.deaths);
         final ImageView back = findViewById(R.id.back);
+        final RecyclerView recyclerView = findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final ArrayList<DistrictModal> districtModals = new ArrayList<>();
+        final DistrictListAdapter  districtListAdapter = new DistrictListAdapter(this, districtModals);
+        recyclerView.setAdapter(districtListAdapter);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +71,10 @@ public class State extends AppCompatActivity {
         head.setText(state);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-// Request a string response from the provided URL.
         final StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        //Log.d(TAG, "onResponse: "+response);
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(response);
@@ -92,6 +97,8 @@ public class State extends AppCompatActivity {
                                             int act = 0, con = 0, dec = 0, rec = 0;
                                             for(int j = 0; j < districts.length(); j++){
                                                 JSONObject district = (JSONObject) districts.get(j);
+                                                districtModals.add(new DistrictModal(district.getString("district"), district.getString("confirmed"), district.getString("recovered"), district.getString("deceased")));
+                                                districtListAdapter.notifyDataSetChanged();
                                                 act += district.getInt("active");
                                                 con += district.getInt("confirmed");
                                                 dec += district.getInt("deceased");
@@ -118,7 +125,6 @@ public class State extends AppCompatActivity {
             }
         });
 
-// Add the request to the RequestQueue.
         queue.add(stringRequest);
 
     }
