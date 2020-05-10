@@ -27,9 +27,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 
-public class statewise extends AppCompatActivity {
+public class statewise extends AppCompatActivity implements stateListAdapter.OnStateListener {
 
     private String URL = "https://zetazook.club/c19/allstates.php";
+
+    final ArrayList<StateModal> stateModals = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,7 @@ public class statewise extends AppCompatActivity {
         final ImageView back = findViewById(R.id.back);
         final RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final ArrayList<StateModal> stateModals = new ArrayList<>();
-        final stateListAdapter stateListAdapter = new stateListAdapter(this, stateModals);
+        final stateListAdapter stateListAdapter = new stateListAdapter(this, stateModals, this);
         recyclerView.setAdapter(stateListAdapter);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +125,6 @@ public class statewise extends AppCompatActivity {
                 stateListAdapter.notifyDataSetChanged();
             }
 
-
     }
 
     @Override
@@ -133,4 +133,10 @@ public class statewise extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    @Override
+    public void onStateClick(int position) {
+        Intent intent = new Intent(statewise.this, State.class);
+        intent.putExtra("s", stateModals.get(position).getState());
+        startActivity(intent);
+    }
 }
