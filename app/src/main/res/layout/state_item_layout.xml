@@ -19,12 +19,16 @@
         android:id="@+id/deaths"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/body"
+        android:theme="@style/bodyWhite"
+        android:paddingHorizontal="6dp"
+        android:minWidth="45dp"
+        android:textAlignment="center"
+        android:background="@drawable/pills_grad3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/sep2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,18 +37,23 @@
         android:paddingHorizontal="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/deaths"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
     <TextView
         android:id="@+id/cured"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/body"
+        android:theme="@style/bodyWhite"
+        android:paddingHorizontal="6dp"
+        android:minWidth="45dp"
+        android:layout_marginEnd="10dp"
+        android:textAlignment="center"
+        android:background="@drawable/pills_grad2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sep2"
+        app:layout_constraintEnd_toStartOf="@id/deaths"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/sep1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,26 +62,20 @@
         android:paddingHorizontal="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cured"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
     <TextView
         android:id="@+id/active"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/body"
+        android:theme="@style/bodyWhite"
+        android:paddingHorizontal="6dp"
+        android:minWidth="45dp"
+        android:layout_marginEnd="10dp"
+        android:textAlignment="center"
+        android:background="@drawable/pills_grad1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sep1"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:id="@+id/sep0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sep"
-        android:theme="@style/body"
-        android:paddingHorizontal="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/active"
+        app:layout_constraintEnd_toStartOf="@id/cured"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

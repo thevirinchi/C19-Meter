@@ -98,7 +98,9 @@
                 android:text="@string/total2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="45dp"
                 android:theme="@style/bodyWhite"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/c"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -108,8 +110,10 @@
                 android:text="@string/cured2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="45dp"
                 android:theme="@style/bodyWhite"
-                android:paddingHorizontal="6dp"
+                android:textAlignment="center"
+                android:paddingHorizontal="15dp"
                 app:layout_constraintEnd_toStartOf="@id/d"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -119,7 +123,9 @@
                 android:text="@string/death2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="45dp"
                 android:theme="@style/bodyWhite"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
