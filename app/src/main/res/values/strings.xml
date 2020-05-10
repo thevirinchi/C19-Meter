@@ -34,7 +34,7 @@
     <string name="_4395">4395</string>
     <string name="national">National Stats</string>
     <string name="blank" />
-    <string name="view_all">View All</string>
+    <string name="view_all">View all</string>
     <string name="next">Next</string>
     <string name="covid_19_dashboard">COVID-19 Dashboard</string>
     <string name="with_the_c19_meter_you_get_all_the_latest_figures_and_advisories_at_a_glance_directly_from_the_govt_of_india">With the C19 Meter, you get all the latest figures and advisories at a glance, directly from the Govt. of India.</string>
@@ -69,4 +69,6 @@
     <string name="cured2">Cured</string>
     <string name="total2">Total</string>
     <string name="title_activity_myth_busters">MythBusters</string>
+    <string name="active_cases">(Active cases)</string>
+    <string name="view_map">View Map</string>
 </resources>
