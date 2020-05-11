@@ -23,7 +23,7 @@
         android:paddingHorizontal="6dp"
         android:minWidth="45dp"
         android:textAlignment="center"
-        android:background="@drawable/pills_grad2"
+        android:background="@drawable/pills_grad_orange"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
