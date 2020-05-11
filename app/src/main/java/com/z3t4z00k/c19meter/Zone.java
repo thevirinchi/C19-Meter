@@ -13,12 +13,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -48,6 +48,16 @@ public class Zone extends AppCompatActivity {
         final ArrayList<ZoneModal> zoneModals = new ArrayList<>();
         final ZoneListAdapter zoneListAdapter = new ZoneListAdapter(this, zoneModals);
         recycler.setAdapter(zoneListAdapter);
+        final ImageView back = findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Zone.this, State.class);
+                intent.putExtra("s", state);
+                startActivity(intent);
+            }
+        });
 
         header.setText(state);
 
