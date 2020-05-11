@@ -157,7 +157,7 @@
                     app:layout_constraintBottom_toTopOf="@id/casesHeading"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
-                
+
                 <!--<androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="fill_parent"
                     android:layout_height="0dp"
@@ -315,6 +315,167 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/recentGraphContainer"
+            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/recentContainer"
+            app:layout_constraintStart_toStartOf="@id/counterContainer"
+            app:layout_constraintEnd_toEndOf="@id/counterContainer">
+
+            <Space
+                android:layout_width="20dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/casesContainerG"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_corners_5_grad1"
+                android:shadowColor="#27377517"
+                android:shadowDy="5"
+                android:translationZ="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/casesHeadingG"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/casesChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/casesHeadingG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="@string/cases"
+                    android:theme="@style/extraWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="16dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recoveriesContainerG"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_corners_5_grad3"
+                android:shadowColor="#27377517"
+                android:shadowDy="5"
+                android:translationZ="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/recoveriesHeadingG"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/recoveriesChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/recoveriesHeadingG"
+                    android:text="@string/recoveries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/extraWhite"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="16dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deathsContainerG"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_corners_5_grad2"
+                android:shadowColor="#27377517"
+                android:shadowDy="5"
+                android:translationZ="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/deathsHeadingG"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/deathsChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/deathsHeadingG"
+                    android:text="@string/deaths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/extraWhite"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Space
+                android:layout_width="20dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/topStates"
             android:layout_width="wrap_content"
@@ -322,7 +483,7 @@
             android:text="@string/top_states"
             android:theme="@style/title"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/recentContainer"
+            app:layout_constraintTop_toBottomOf="@id/recentGraphContainer"
             app:layout_constraintStart_toStartOf="@id/counterContainer"/>
 
         <TextView
@@ -342,7 +503,7 @@
             android:text="@string/view_all"
             android:theme="@style/extra"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/recentContainer"
+            app:layout_constraintTop_toBottomOf="@id/recentGraphContainer"
             app:layout_constraintEnd_toEndOf="@id/statesContainer"/>
 
         <LinearLayout
@@ -720,6 +881,12 @@
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@id/advisory5Container"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/response"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/advisory5Container"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.View;
@@ -17,16 +18,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 
 public class dashboard extends AppCompatActivity {
 
     private static final String TAG = "dashboard";
+    private static final String URL_GRAPH = "https://api.covid19india.org/data.json";
     String URL = "https://c19meterphp.herokuapp.com/topstates.php";
 
     @Override
@@ -247,21 +263,21 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
-        /*LineChart casesChart = findViewById(R.id.casesChart);
-        List<Entry> cases = new ArrayList<>();
+        LineChart casesChart = findViewById(R.id.casesChart);
+        List<Entry> casesList = new ArrayList<>();
 
-        cases.add(new Entry(1, 4));
-        cases.add(new Entry(2, 3));
-        cases.add(new Entry(3, 6));
+        casesList.add(new Entry(1, 4));
+        casesList.add(new Entry(2, 3));
+        casesList.add(new Entry(3, 6));
 
-        LineDataSet caseDataSet = new LineDataSet(cases, "");
+        LineDataSet caseDataSet = new LineDataSet(casesList, "");
         caseDataSet.setValueTextColor(R.color.colorDarkGray);
         caseDataSet.setDrawValues(false);
         caseDataSet.setDrawCircles(false);
         caseDataSet.setDrawFilled(true);
         caseDataSet.setFillDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_corners_5_grad1));
         caseDataSet.setDrawIcons(false);
-        
+
         LineData caseData = new LineData(caseDataSet);
         casesChart.setData(caseData);
         casesChart.getLegend().setEnabled(false);
@@ -308,35 +324,84 @@ public class dashboard extends AppCompatActivity {
         recoveriesChart.invalidate();
 
 
-        LineChart deathsChart = findViewById(R.id.deathsChart);
-        List<Entry> deaths = new ArrayList<>();
+        final LineChart deathsChart = findViewById(R.id.deathsChart);
 
-        deaths.add(new Entry(1, 4));
-        deaths.add(new Entry(2, 3));
-        deaths.add(new Entry(3, 6));
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        final List<Entry> finalDeaths =new ArrayList<>();
+        final StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GRAPH,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        response = response.substring(0, response.indexOf("statewise")-4);
+                        response += "}";
+                        TextView res = findViewById(R.id.response);
+                        res.setText(response);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if(jsonObject!=null){
+                            JSONArray days = null;
+                            try {
+                                days = jsonObject.getJSONArray("cases_time_series");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if(days!=null){
+                                for(int i = 0; i < days.length(); i++) {
+                                    JSONObject day = null;
+                                    try {
+                                        day = (JSONObject) days.get(i);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (day != null) {
+                                        try {
+                                            finalDeaths.add(new Entry(i+1, day.getInt("totaldeceased")));
+                                            Log.d(TAG, "onResponse: Updated Size: " + finalDeaths.size());
 
-        LineDataSet deathDataSet = new LineDataSet(deaths, "");
-        deathDataSet.setValueTextColor(R.color.colorDarkGray);
-        deathDataSet.setDrawValues(false);
-        deathDataSet.setDrawCircles(false);
-        deathDataSet.setDrawFilled(true);
-        deathDataSet.setFillDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_corners_5_grad3));
-        deathDataSet.setDrawIcons(false);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                                LineDataSet deathDataSet = new LineDataSet(finalDeaths, "");
+                                deathDataSet.setValueTextColor(R.color.colorDarkGray);
+                                deathDataSet.setDrawValues(false);
+                                deathDataSet.setDrawCircles(false);
+                                deathDataSet.setDrawFilled(false);
+                                deathDataSet.setLineWidth(2);
+                                deathDataSet.setHighLightColor(R.color.colorPrimary);
+                                //deathDataSet.setFillDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.rounded_corners_5_grad3));
+                                deathDataSet.setDrawIcons(false);
 
+                                LineData deathData = new LineData(deathDataSet);
+                                deathsChart.setData(deathData);
+                                deathsChart.getLegend().setEnabled(false);
+                                deathsChart.setDescription(null);
+                                deathsChart.getAxisLeft().setDrawLabels(false);
+                                deathsChart.getAxisRight().setDrawLabels(false);
+                                deathsChart.getAxisLeft().setDrawGridLines(false);
+                                deathsChart.getXAxis().setDrawGridLines(false);
+                                deathsChart.getAxisLeft().setEnabled(false);;
+                                deathsChart.getXAxis().setEnabled(false);;
+                                deathsChart.getAxisRight().setEnabled(false);
+                                deathsChart.getAxisRight().setGridColor(R.color.colorPrimary);
+                                deathsChart.invalidate();
+                            }
+                        }
+                    }
 
-        LineData deathData = new LineData(deathDataSet);
-        deathsChart.setData(deathData);
-        deathsChart.getLegend().setEnabled(false);
-        deathsChart.setDescription(null);
-        deathsChart.getAxisLeft().setDrawLabels(false);
-        deathsChart.getAxisRight().setDrawLabels(false);
-        deathsChart.getAxisLeft().setDrawGridLines(false);
-        deathsChart.getXAxis().setDrawGridLines(false);
-        deathsChart.getAxisLeft().setEnabled(false);;
-        deathsChart.getXAxis().setEnabled(false);;
-        deathsChart.getAxisRight().setEnabled(false);
-        deathsChart.getAxisRight().setGridColor(R.color.colorPrimary);
-        deathsChart.invalidate();*/
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: " + error.getMessage());
+            }
+        });
+
+        queue.add(stringRequest);
     }
 
     @Override
