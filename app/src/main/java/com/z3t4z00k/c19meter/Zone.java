@@ -14,6 +14,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Zone extends AppCompatActivity {
@@ -40,6 +43,11 @@ public class Zone extends AppCompatActivity {
         final String state = Objects.requireNonNull(bundle).getString("s");
         final RequestQueue queue = Volley.newRequestQueue(this);
         final TextView header = findViewById(R.id.header);
+        final RecyclerView recycler = findViewById(R.id.recycler);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        final ArrayList<ZoneModal> zoneModals = new ArrayList<>();
+        final ZoneListAdapter zoneListAdapter = new ZoneListAdapter(this, zoneModals);
+        recycler.setAdapter(zoneListAdapter);
 
         header.setText(state);
 
@@ -83,6 +91,8 @@ public class Zone extends AppCompatActivity {
                                         try {
                                             if(zone.getString("state").equals(state)){
                                                 Log.d(TAG, "onResponse21: "+zone);
+                                                zoneModals.add(new ZoneModal(zone.getString("district"), zone.getString("zone")));
+                                                zoneListAdapter.notifyDataSetChanged();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
