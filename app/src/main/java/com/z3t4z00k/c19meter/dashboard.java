@@ -279,8 +279,6 @@ public class dashboard extends AppCompatActivity {
                     public void onResponse(String response) {
                         response = response.substring(0, response.indexOf("statewise")-4);
                         response += "}";
-                        TextView res = findViewById(R.id.response);
-                        res.setText(response);
                         JSONObject jsonObject = null;
                         try {
                             jsonObject = new JSONObject(response);
@@ -338,8 +336,8 @@ public class dashboard extends AppCompatActivity {
                                 deathsChart.getAxisRight().setDrawLabels(false);
                                 deathsChart.getAxisLeft().setDrawGridLines(false);
                                 deathsChart.getXAxis().setDrawGridLines(false);
-                                deathsChart.getAxisLeft().setEnabled(false);;
-                                deathsChart.getXAxis().setEnabled(false);;
+                                deathsChart.getAxisLeft().setEnabled(false);
+                                deathsChart.getXAxis().setEnabled(false);
                                 deathsChart.getAxisRight().setEnabled(false);
                                 deathsChart.getAxisRight().setGridColor(R.color.colorPrimary);
                                 deathsChart.invalidate();
@@ -364,8 +362,8 @@ public class dashboard extends AppCompatActivity {
                                 recoveriesChart.getAxisRight().setDrawLabels(false);
                                 recoveriesChart.getAxisLeft().setDrawGridLines(false);
                                 recoveriesChart.getXAxis().setDrawGridLines(false);
-                                recoveriesChart.getAxisLeft().setEnabled(false);;
-                                recoveriesChart.getXAxis().setEnabled(false);;
+                                recoveriesChart.getAxisLeft().setEnabled(false);
+                                recoveriesChart.getXAxis().setEnabled(false);
                                 recoveriesChart.getAxisRight().setEnabled(false);
                                 recoveriesChart.getAxisRight().setGridColor(R.color.colorPrimary);
                                 recoveriesChart.invalidate();
@@ -390,8 +388,8 @@ public class dashboard extends AppCompatActivity {
                                 casesChart.getAxisRight().setDrawLabels(false);
                                 casesChart.getAxisLeft().setDrawGridLines(false);
                                 casesChart.getXAxis().setDrawGridLines(false);
-                                casesChart.getAxisLeft().setEnabled(false);;
-                                casesChart.getXAxis().setEnabled(false);;
+                                casesChart.getAxisLeft().setEnabled(false);
+                                casesChart.getXAxis().setEnabled(false);
                                 casesChart.getAxisRight().setEnabled(false);
                                 casesChart.getAxisRight().setGridColor(R.color.colorPrimary);
                                 casesChart.invalidate();
