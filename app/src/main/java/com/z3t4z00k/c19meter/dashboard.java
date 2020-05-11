@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,10 +20,13 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 public class dashboard extends AppCompatActivity {
 
+    private static final String TAG = "dashboard";
     String URL = "https://c19meterphp.herokuapp.com/topstates.php";
 
     @Override
@@ -31,6 +35,7 @@ public class dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         final SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
+        final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("India"));
         final TextView count = findViewById(R.id.count);
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
@@ -150,6 +155,17 @@ public class dashboard extends AppCompatActivity {
                         s1c.setText(obj.getString("C1"));
                         s2c.setText(obj.getString("C2"));
                         s3c.setText(obj.getString("C3"));
+                        Log.d(TAG, "onPostExecute: Setting top states");
+                        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("S1", obj.getString("S1"));
+                        editor.putString("S2", obj.getString("S2"));
+                        editor.putString("S3", obj.getString("S3"));
+                        editor.putString("C1", obj.getString("C1"));
+                        editor.putString("C2", obj.getString("C2"));
+                        editor.putString("C3", obj.getString("C3"));
+                        editor.putString("dd3", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+                        editor.putString("mm3", String.valueOf(calendar.get(Calendar.MONTH)));
+                        editor.apply();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,8 +173,21 @@ public class dashboard extends AppCompatActivity {
                 }
             }
         }
-        Login login = new Login();
-        login.execute();
+        if(!String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).equals(sharedPreferences.getString("dd3", "00")) && !String.valueOf(calendar.get(Calendar.MONTH)).equals(sharedPreferences.getString("mm3", "00"))) {
+            Log.d(TAG, "Current- " + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH));
+            Log.d(TAG, "Stored- " + sharedPreferences.getString("dd3", "00") + "/" + sharedPreferences.getString("mm3", "00"));
+            Login login = new Login();
+            login.execute();
+        }
+        else{
+            Log.d(TAG, "onCreate: Fetching top states from SP");
+            s1h.setText(sharedPreferences.getString("S1", ""));
+            s2h.setText(sharedPreferences.getString("S2", ""));
+            s3h.setText(sharedPreferences.getString("S3", ""));
+            s1c.setText(sharedPreferences.getString("C1", ""));
+            s2c.setText(sharedPreferences.getString("C2", ""));
+            s3c.setText(sharedPreferences.getString("C3", ""));
+        }
 
         count.setText(sharedPreferences.getString("confi", "0"));
         cases.setText(sharedPreferences.getString("cases", "0"));
