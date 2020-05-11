@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,9 @@ public class Zone extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         final String state = Objects.requireNonNull(bundle).getString("s");
         final RequestQueue queue = Volley.newRequestQueue(this);
+        final TextView header = findViewById(R.id.header);
+
+        header.setText(state);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
