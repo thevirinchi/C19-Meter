@@ -70,7 +70,6 @@ public class State extends AppCompatActivity {
                 Intent intent =new Intent(State.this, Zone.class);
                 intent.putExtra("s", state);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
