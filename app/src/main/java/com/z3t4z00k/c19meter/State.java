@@ -35,6 +35,7 @@ import java.util.Objects;
 
 public class State extends AppCompatActivity {
 
+    private static final String URL_ZONE = "https://api.covid19india.org/zones.json";
     String TAG = "State";
 
     @Override
@@ -55,6 +56,23 @@ public class State extends AppCompatActivity {
         final ArrayList<DistrictModal> districtModals = new ArrayList<>();
         final DistrictListAdapter  districtListAdapter = new DistrictListAdapter(this, districtModals);
         recyclerView.setAdapter(districtListAdapter);
+        final TextView zones = findViewById(R.id.zoneInfo);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        final String state = Objects.requireNonNull(bundle).getString("s");
+        Log.d("State", Objects.requireNonNull(state));
+        head.setText(state);
+
+        zones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(State.this, Zone.class);
+                intent.putExtra("s", state);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +81,6 @@ public class State extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        final String state = Objects.requireNonNull(bundle).getString("s");
-        Log.d("State", Objects.requireNonNull(state));
-        head.setText(state);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
         final StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,

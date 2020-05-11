@@ -19,6 +19,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
+        <activity
+            android:name=".Zone"
+            android:label="@string/title_activity_zone"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".State" />
         <activity
             android:name=".MythBusters"
@@ -29,6 +33,7 @@
             android:label="@string/title_activity_statewise"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".onBoardingThree" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -45,6 +50,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
