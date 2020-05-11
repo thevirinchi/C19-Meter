@@ -39,18 +39,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-public class dashboard extends AppCompatActivity {
+public class dashboard extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "dashboard";
     private static final String URL_GRAPH = "https://api.covid19india.org/data.json";
     String URL = "https://c19meterphp.herokuapp.com/topstates.php";
+    ConstraintLayout nav;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        final SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MainActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
         final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("India"));
         final TextView count = findViewById(R.id.count);
         final TextView death = findViewById(R.id.deaths);
@@ -80,65 +82,21 @@ public class dashboard extends AppCompatActivity {
         final TextView topStates = findViewById(R.id.topStatesViewMore);
         final ImageView navButton = findViewById(R.id.navigationBarButton);
         final ImageView close = findViewById(R.id.close);
-        final ConstraintLayout nav = findViewById(R.id.navigationDrawer);
+        nav = findViewById(R.id.navigationDrawer);
         final TextView faq = findViewById(R.id.faq);
         final TextView state = findViewById(R.id.list);
         final TextView map = findViewById(R.id.mapView);
         final TextView viewMap = findViewById(R.id.map);
         final TextView myths = findViewById(R.id.myths);
 
-        myths.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, MythBusters.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        viewMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, MapsActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, MapsActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        state.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, statewise.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mohfw.gov.in/pdf/FAQ.pdf")));
-            }
-        });
-
+        myths.setOnClickListener(this);
+        viewMap.setOnClickListener(this);
+        map.setOnClickListener(this);
+        state.setOnClickListener(this);
+        faq.setOnClickListener(this);
         nav.setVisibility(View.GONE);
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nav.setVisibility(View.VISIBLE);
-            }
-        });
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nav.setVisibility(View.GONE);
-            }
-        });
+        navButton.setOnClickListener(this);
+        close.setOnClickListener(this);
 
         @SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
@@ -220,48 +178,12 @@ public class dashboard extends AppCompatActivity {
         d4.setText(sharedPreferences.getString("d4", ""));
         d5.setText(sharedPreferences.getString("d5", ""));
 
-        l1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l1", "error"))));
-            }
-        });
-
-        l2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l2", "error"))));
-            }
-        });
-
-        l3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l3", "error"))));
-            }
-        });
-
-        l4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l4", "error"))));
-            }
-        });
-
-        l5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l5", "error"))));
-            }
-        });
-
-        topStates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(dashboard.this, statewise.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
+        l1.setOnClickListener(this);
+        l2.setOnClickListener(this);
+        l3.setOnClickListener(this);
+        l4.setOnClickListener(this);
+        l5.setOnClickListener(this);
+        topStates.setOnClickListener(this);
 
         final LineChart casesChart = findViewById(R.id.casesChart);
         final List<Entry> casesList = new ArrayList<>();
@@ -416,4 +338,47 @@ public class dashboard extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.myths:
+                startActivity(new Intent(dashboard.this, MythBusters.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.map:
+            case R.id.mapView:
+                startActivity(new Intent(dashboard.this, MapsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.list:
+            case R.id.topStatesViewMore:
+                startActivity(new Intent(dashboard.this, statewise.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.faq:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mohfw.gov.in/pdf/FAQ.pdf")));
+                break;
+            case R.id.navigationBarButton:
+                nav.setVisibility(View.VISIBLE);
+                break;
+            case R.id.close:
+                nav.setVisibility(View.GONE);
+                break;
+            case R.id.more1:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l1", "error"))));
+                break;
+            case R.id.more2:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l2", "error"))));
+                break;
+            case R.id.more3:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l3", "error"))));
+                break;
+            case R.id.more4:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l4", "error"))));
+                break;
+            case R.id.more5:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(sharedPreferences.getString("l5", "error"))));
+                break;
+        }
+    }
 }
