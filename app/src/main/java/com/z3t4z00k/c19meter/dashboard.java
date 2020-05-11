@@ -263,66 +263,11 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
-        LineChart casesChart = findViewById(R.id.casesChart);
-        List<Entry> casesList = new ArrayList<>();
+        final LineChart casesChart = findViewById(R.id.casesChart);
+        final List<Entry> casesList = new ArrayList<>();
 
-        casesList.add(new Entry(1, 4));
-        casesList.add(new Entry(2, 3));
-        casesList.add(new Entry(3, 6));
-
-        LineDataSet caseDataSet = new LineDataSet(casesList, "");
-        caseDataSet.setValueTextColor(R.color.colorDarkGray);
-        caseDataSet.setDrawValues(false);
-        caseDataSet.setDrawCircles(false);
-        caseDataSet.setDrawFilled(true);
-        caseDataSet.setFillDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_corners_5_grad1));
-        caseDataSet.setDrawIcons(false);
-
-        LineData caseData = new LineData(caseDataSet);
-        casesChart.setData(caseData);
-        casesChart.getLegend().setEnabled(false);
-        casesChart.setDescription(null);
-        casesChart.getAxisLeft().setDrawLabels(false);
-        casesChart.getAxisRight().setDrawLabels(false);
-        casesChart.getAxisLeft().setDrawGridLines(false);
-        casesChart.getXAxis().setDrawGridLines(false);
-        casesChart.getAxisLeft().setEnabled(false);;
-        casesChart.getXAxis().setEnabled(false);;
-        casesChart.getAxisRight().setEnabled(false);
-        casesChart.getAxisRight().setGridColor(R.color.colorPrimary);
-        casesChart.invalidate();
-
-
-        LineChart recoveriesChart = findViewById(R.id.recoveriesChart);
-        List<Entry> recoveries = new ArrayList<>();
-
-        recoveries.add(new Entry(1, 4));
-        recoveries.add(new Entry(2, 3));
-        recoveries.add(new Entry(3, 6));
-
-        LineDataSet recoveryDataSet = new LineDataSet(recoveries, "");
-        recoveryDataSet.setValueTextColor(R.color.colorDarkGray);
-        recoveryDataSet.setDrawValues(false);
-        recoveryDataSet.setDrawCircles(false);
-        recoveryDataSet.setDrawFilled(true);
-        recoveryDataSet.setFillDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_corners_5_grad2));
-        recoveryDataSet.setDrawIcons(false);
-
-
-        LineData recoveryData = new LineData(recoveryDataSet);
-        recoveriesChart.setData(recoveryData);
-        recoveriesChart.getLegend().setEnabled(false);
-        recoveriesChart.setDescription(null);
-        recoveriesChart.getAxisLeft().setDrawLabels(false);
-        recoveriesChart.getAxisRight().setDrawLabels(false);
-        recoveriesChart.getAxisLeft().setDrawGridLines(false);
-        recoveriesChart.getXAxis().setDrawGridLines(false);
-        recoveriesChart.getAxisLeft().setEnabled(false);;
-        recoveriesChart.getXAxis().setEnabled(false);;
-        recoveriesChart.getAxisRight().setEnabled(false);
-        recoveriesChart.getAxisRight().setGridColor(R.color.colorPrimary);
-        recoveriesChart.invalidate();
-
+        final LineChart recoveriesChart = findViewById(R.id.recoveriesChart);
+        final List<Entry> recoveries = new ArrayList<>();
 
         final LineChart deathsChart = findViewById(R.id.deathsChart);
 
@@ -350,7 +295,10 @@ public class dashboard extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             if(days!=null){
-                                for(int i = 0; i < days.length(); i++) {
+                                int init = 0;
+                                for(int i = days.length()-14; i < days.length(); i++) {
+                                    if(init == 0)
+                                        init = i;
                                     JSONObject day = null;
                                     try {
                                         day = (JSONObject) days.get(i);
@@ -359,7 +307,9 @@ public class dashboard extends AppCompatActivity {
                                     }
                                     if (day != null) {
                                         try {
-                                            finalDeaths.add(new Entry(i+1, day.getInt("totaldeceased")));
+                                            finalDeaths.add(new Entry((i-init)+1, day.getInt("dailydeceased")));
+                                            recoveries.add(new Entry((i-init)+1, day.getInt("dailyrecovered")));
+                                            casesList.add(new Entry((i-init)+1, day.getInt("dailyconfirmed")));
                                             Log.d(TAG, "onResponse: Updated Size: " + finalDeaths.size());
 
                                         } catch (JSONException e) {
@@ -367,14 +317,17 @@ public class dashboard extends AppCompatActivity {
                                         }
                                     }
                                 }
+                                int color = ContextCompat.getColor(getBaseContext(), R.color.colorPrimary);
                                 LineDataSet deathDataSet = new LineDataSet(finalDeaths, "");
                                 deathDataSet.setValueTextColor(R.color.colorDarkGray);
                                 deathDataSet.setDrawValues(false);
                                 deathDataSet.setDrawCircles(false);
                                 deathDataSet.setDrawFilled(false);
-                                deathDataSet.setLineWidth(2);
-                                deathDataSet.setHighLightColor(R.color.colorPrimary);
-                                //deathDataSet.setFillDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.rounded_corners_5_grad3));
+                                deathDataSet.setLineWidth(3);
+                                deathDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                deathDataSet.setColor(color);
+                                deathDataSet.setDrawFilled(true);
+                                deathDataSet.setFillDrawable(getDrawable(R.drawable.grad_white));
                                 deathDataSet.setDrawIcons(false);
 
                                 LineData deathData = new LineData(deathDataSet);
@@ -390,6 +343,59 @@ public class dashboard extends AppCompatActivity {
                                 deathsChart.getAxisRight().setEnabled(false);
                                 deathsChart.getAxisRight().setGridColor(R.color.colorPrimary);
                                 deathsChart.invalidate();
+
+                                LineDataSet recoveryDataSet = new LineDataSet(recoveries, "");
+                                recoveryDataSet.setValueTextColor(R.color.colorDarkGray);
+                                recoveryDataSet.setDrawValues(false);
+                                recoveryDataSet.setDrawCircles(false);
+                                recoveryDataSet.setDrawFilled(false);
+                                recoveryDataSet.setLineWidth(3);
+                                recoveryDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                recoveryDataSet.setColor(color);
+                                recoveryDataSet.setDrawFilled(true);
+                                recoveryDataSet.setFillDrawable(getDrawable(R.drawable.grad_white));
+                                recoveryDataSet.setDrawIcons(false);
+
+                                LineData recoveryData = new LineData(recoveryDataSet);
+                                recoveriesChart.setData(recoveryData);
+                                recoveriesChart.getLegend().setEnabled(false);
+                                recoveriesChart.setDescription(null);
+                                recoveriesChart.getAxisLeft().setDrawLabels(false);
+                                recoveriesChart.getAxisRight().setDrawLabels(false);
+                                recoveriesChart.getAxisLeft().setDrawGridLines(false);
+                                recoveriesChart.getXAxis().setDrawGridLines(false);
+                                recoveriesChart.getAxisLeft().setEnabled(false);;
+                                recoveriesChart.getXAxis().setEnabled(false);;
+                                recoveriesChart.getAxisRight().setEnabled(false);
+                                recoveriesChart.getAxisRight().setGridColor(R.color.colorPrimary);
+                                recoveriesChart.invalidate();
+
+                                LineDataSet caseDataSet = new LineDataSet(casesList, "");
+                                caseDataSet.setValueTextColor(R.color.colorDarkGray);
+                                caseDataSet.setDrawValues(false);
+                                caseDataSet.setDrawCircles(false);
+                                caseDataSet.setDrawFilled(false);
+                                caseDataSet.setLineWidth(3);
+                                caseDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                caseDataSet.setColor(color);
+                                caseDataSet.setDrawFilled(true);
+                                caseDataSet.setFillDrawable(getDrawable(R.drawable.grad_white));
+                                caseDataSet.setDrawIcons(false);
+
+                                LineData caseData = new LineData(caseDataSet);
+                                casesChart.setData(caseData);
+                                casesChart.getLegend().setEnabled(false);
+                                casesChart.setDescription(null);
+                                casesChart.getAxisLeft().setDrawLabels(false);
+                                casesChart.getAxisRight().setDrawLabels(false);
+                                casesChart.getAxisLeft().setDrawGridLines(false);
+                                casesChart.getXAxis().setDrawGridLines(false);
+                                casesChart.getAxisLeft().setEnabled(false);;
+                                casesChart.getXAxis().setEnabled(false);;
+                                casesChart.getAxisRight().setEnabled(false);
+                                casesChart.getAxisRight().setGridColor(R.color.colorPrimary);
+                                casesChart.invalidate();
+
                             }
                         }
                     }
