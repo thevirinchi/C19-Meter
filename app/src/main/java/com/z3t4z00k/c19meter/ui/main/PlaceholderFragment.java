@@ -26,11 +26,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.z3t4z00k.c19meter.DistrictModal;
 import com.z3t4z00k.c19meter.R;
+import com.z3t4z00k.c19meter.ResourceListAdapter;
+import com.z3t4z00k.c19meter.ResourceModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -67,12 +70,14 @@ public class PlaceholderFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         final String response = sharedPreferences.getString("res", "NULL");
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         final RecyclerView recycler = root.findViewById(R.id.recycler);
+        final ArrayList<ResourceModel>resourceModels = new ArrayList<>();
+        final ResourceListAdapter resourceListAdapter = new ResourceListAdapter(getContext(), resourceModels);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler.setAdapter(resourceListAdapter);
         if(response.equals("NULL"))
             Toast.makeText(getContext(), "Error while fetching records. Plaese try again.", Toast.LENGTH_LONG).show();
         else {
@@ -86,6 +91,7 @@ public class PlaceholderFragment extends Fragment {
                     switch (s) {
                         case 0:
                             type = "CoVID-19 Testing Lab";
+
                             break;
                         case 1:
                             type = "Free Food";
@@ -122,7 +128,9 @@ public class PlaceholderFragment extends Fragment {
                                 if(resources.getJSONObject(i).getString("state").equals(state) && resources.getJSONObject(i).getString("category").equals(type)){
                                     resource = resources.getJSONObject(i);
                                     Log.d(TAG, "onChanged: resource=" + resource.getString("nameoftheorganisation"));
-
+                                    resourceModels.add(new ResourceModel(resource.getString("city"), resource.getString("nameoftheorganisation"), resource.getString("descriptionandorserviceprovided"),
+                                            resource.getString("contact"), resource.getString("phonenumber")));
+                                    resourceListAdapter.notifyDataSetChanged();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
