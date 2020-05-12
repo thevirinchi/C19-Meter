@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -92,6 +93,41 @@ public class State extends AppCompatActivity {
         });
 
         final RequestQueue queue = Volley.newRequestQueue(this);
+
+        final StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "https://api.covid19india.org/resources/resources.json",new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(jsonObject!= null) {
+                    JSONArray resources = null;
+                    try {
+                        resources = jsonObject.getJSONArray("resources");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if(resources!=null) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("res", String.valueOf(resources));
+                        editor.apply();
+                        Log.d(TAG, "onResponse: " + sharedPreferences.getString("res", "NULL"));
+                    }
+                }
+                else
+                    Log.d(TAG, "onResponse: NULL");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: " + error.getMessage());
+            }
+        });
+
         final StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -145,7 +181,7 @@ public class State extends AppCompatActivity {
                 Log.d(TAG, "onErrorResponse: " + error.getMessage());
             }
         });
-
+        queue.add(stringRequest2);
         queue.add(stringRequest);
 
     }

@@ -9,10 +9,11 @@ import androidx.lifecycle.ViewModel;
 public class PageViewModel extends ViewModel {
 
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
-    private LiveData<String> mText = Transformations.map(mIndex, new Function<Integer, String>() {
+    private String state;
+    private LiveData<Integer> mText = Transformations.map(mIndex, new Function<Integer, Integer>() {
         @Override
-        public String apply(Integer input) {
-            return "Hello world from section: " + input;
+        public Integer apply(Integer input) {
+            return input;
         }
     });
 
@@ -20,7 +21,15 @@ public class PageViewModel extends ViewModel {
         mIndex.setValue(index);
     }
 
-    public LiveData<String> getText() {
+    public LiveData<Integer> getText() {
         return mText;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
     }
 }

@@ -101,4 +101,7 @@
     <string name="tab_text_4">Hospital</string>
     <string name="tab_text_5">Delivery</string>
     <string name="resources">Resources</string>
+    <string name="tab_text_6">Helpline</string>
+    <string name="tab_next_7">Kitchen</string>
+    <string name="tab_next_8">Others</string>
 </resources>
