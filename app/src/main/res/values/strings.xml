@@ -104,4 +104,10 @@
     <string name="tab_text_6">Helpline</string>
     <string name="tab_next_7">Kitchen</string>
     <string name="tab_next_8">Others</string>
+    <string name="city">City</string>
+    <string name="organization">Organization:</string>
+    <string name="loadSign">...</string>
+    <string name="description">Description</string>
+    <string name="website">Website</string>
+    <string name="phone">Phone</string>
 </resources>
