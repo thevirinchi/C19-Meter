@@ -55,7 +55,7 @@
     <string name="nation_wide_data">Nation wide data</string>
     <string name="check_the_status_of_a_state_interactively_through_maps">Check the status of a state interactively through maps.</string>
     <string name="read_more">Read more</string>
-    <string name="state_wise_list">State Wise List</string>
+    <string name="state_wise_list">States</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
     <string name="title_activity_statewise">state-wise</string>
@@ -94,4 +94,11 @@
     <string name="zone_info">View Zone Info</string>
     <string name="title_activity_zone">Zone</string>
     <string name="color">Zone</string>
+    <string name="title_activity_resources">Resources</string>
+    <string name="tab_text_1">Testing</string>
+    <string name="tab_text_2">Food</string>
+    <string name="tab_text_3">Funds</string>
+    <string name="tab_text_4">Hospital</string>
+    <string name="tab_text_5">Delivery</string>
+    <string name="resources">Resources</string>
 </resources>

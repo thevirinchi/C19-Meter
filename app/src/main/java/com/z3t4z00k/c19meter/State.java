@@ -51,6 +51,7 @@ public class State extends AppCompatActivity {
         final TextView recov = findViewById(R.id.recoveries);
         final TextView death = findViewById(R.id.deaths);
         final ImageView back = findViewById(R.id.back);
+        final ImageView res = findViewById(R.id.resButton);
         final RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final ArrayList<DistrictModal> districtModals = new ArrayList<>();
@@ -63,6 +64,15 @@ public class State extends AppCompatActivity {
         final String state = Objects.requireNonNull(bundle).getString("s");
         Log.d("State", Objects.requireNonNull(state));
         head.setText(state);
+
+        res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(State.this, Resources.class);
+                intent.putExtra("s", state);
+                startActivity(intent);
+            }
+        });
 
         zones.setOnClickListener(new View.OnClickListener() {
             @Override
