@@ -24,7 +24,7 @@ class RequestHandler {
         StringBuilder sb = new StringBuilder();
         try {
             url = new URL(requestURL);
-            Log.d("RequestHandler", "requestURL- " + url);
+            //Log.d("RequestHandler", "requestURL- " + url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
@@ -38,19 +38,19 @@ class RequestHandler {
                     new OutputStreamWriter(os, "UTF-8"));
             writer.write(getPostDataString(postDataParams));
 
-            Log.d("RequestHandler", String.valueOf(writer));
+            //Log.d("RequestHandler", String.valueOf(writer));
 
             writer.flush();
             writer.close();
             os.close();
             int responseCode = conn.getResponseCode();
-            Log.d("RequestHandler", String.valueOf(responseCode));
+            //Log.d("RequestHandler", String.valueOf(responseCode));
 
             if (responseCode == HttpsURLConnection.HTTP_OK || true) {
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 sb = new StringBuilder();
-                Log.d("RequestHandler", String.valueOf(sb));
+                //Log.d("RequestHandler", String.valueOf(sb));
                 String response;
 
                 while ((response = br.readLine()) != null) {
@@ -77,7 +77,7 @@ class RequestHandler {
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
-        Log.d("RequestHandler", "URL- " + String.valueOf(result));
+        //Log.d("RequestHandler", "URL- " + String.valueOf(result));
         return result.toString();
     }
 }

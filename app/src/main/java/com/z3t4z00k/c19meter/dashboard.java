@@ -43,7 +43,7 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
 
     private static final String TAG = "dashboard";
     private static final String URL_GRAPH = "https://api.covid19india.org/data.json";
-    String URL = "https://c19meterphp.herokuapp.com/topstates.php";
+    //String URL = "";
     ConstraintLayout nav;
     SharedPreferences sharedPreferences;
 
@@ -58,12 +58,12 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
         final TextView death = findViewById(R.id.deaths);
         final TextView recov = findViewById(R.id.recoveries);
         final TextView cases = findViewById(R.id.cases);
-        final TextView s1c = findViewById(R.id.state1count);
+        /*final TextView s1c = findViewById(R.id.state1count);
         final TextView s2c = findViewById(R.id.state2count);
         final TextView s3c = findViewById(R.id.state3count);
         final TextView s1h = findViewById(R.id.state1Heading);
         final TextView s2h = findViewById(R.id.state2Heading);
-        final TextView s3h = findViewById(R.id.state3Heading);
+        final TextView s3h = findViewById(R.id.state3Heading);*/
         final TextView t1 = findViewById(R.id.title1);
         final TextView d1 = findViewById(R.id.date1);
         final TextView t2 = findViewById(R.id.title2);
@@ -98,7 +98,7 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
         navButton.setOnClickListener(this);
         close.setOnClickListener(this);
 
-        @SuppressLint("StaticFieldLeak")
+        /*@SuppressLint("StaticFieldLeak")
         class Login extends AsyncTask<Void, Void, String> {
 
             @Override
@@ -143,7 +143,7 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(dashboard.this, "Exception: " + e, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(dashboard.this, "Exception: " + e, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -161,7 +161,7 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
             s1c.setText(sharedPreferences.getString("C1", ""));
             s2c.setText(sharedPreferences.getString("C2", ""));
             s3c.setText(sharedPreferences.getString("C3", ""));
-        }
+        }*/
 
         count.setText(sharedPreferences.getString("confi", "0"));
         cases.setText(sharedPreferences.getString("cases", "0"));

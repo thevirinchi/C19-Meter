@@ -43,7 +43,6 @@ public class Resources extends AppCompatActivity {
 
         final ImageView back = findViewById(R.id.back);
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
